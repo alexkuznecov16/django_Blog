@@ -1,11 +1,11 @@
-# # Django
-# *.log
-# *.pot
-# *.pyc
-# __pycache__/
-# db.sqlite3
-# /media
-# /static
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+/media
+/static
 
-# # venv
-# venv/
+# venv
+venv/
