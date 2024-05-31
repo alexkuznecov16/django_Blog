@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+}
+
+nav {
+    margin: 0;
+    padding: 1em;
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1em;
+}
+
+main {
+    padding: 2em 0;
+    background-color: #fff;
+    flex: 1;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+    padding: 2em 0;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.card {
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1em;
+    margin: 1em;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.2s;
+    flex: 1 1 calc(33.333% - 2em);
+}
+
+.banner {
+    max-width: 100%;
+    height: auto;
+}
+
+.card:hover {
+    opacity: .7;
+}
+
+.card-title {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+.card-text {
+    font-size: 1em;
+    color: #666;
+    margin: 0.5em 0;
+}
+
+.card-date {
+    font-size: 0.9em;
+    color: #999;
+    margin: 0.5em 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

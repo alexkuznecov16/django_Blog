@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Posts List{% endblock %}
+
+{% block posts %}
+    <h1>Posts List</h1>
+    <div class="card-container">
+        {% for post in posts %}
+        <div class="card">
+            <img class="banner" src="{{ post.banner.url }}" alt="{{ post.title }}">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-text">{{ post.text|truncatechars:40 }}</p>
+            <p class="card-date">{{ post.date }}</p>
+            <a href="{% url 'PostDetail' slug=post.slug %}">Read More</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

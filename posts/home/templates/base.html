@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django app{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v={{ timestamp }}"></link>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Django Site</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <main class="container">
+        {% if request.path == "/" %}
+            {% block home %}
+            <!-- Home page content goes here -->
+            {% endblock %}
+        {% elif request.path == "/posts/" %}
+            {% block posts %}
+            <!-- Posts content goes here -->
+            {% endblock %}
+        {% elif "/posts/" in request.path %}
+            {% block post_details %}
+                <!-- Posts content goes here -->
+            {% endblock %}
+        {% else %}
+            <!-- Default content goes here -->
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2024 My Django Site. All rights reserved.</p>
+    </footer>
+</body>
+</html>
