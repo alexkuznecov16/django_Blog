@@ -8,7 +8,7 @@
             <h2 class="card-title">{{ post.title }}</h2>
             <p class="card-text">{{ post.text|truncatechars:40 }}</p>
             <p class="card-date">{{ post.date }}</p>
-            <a href="{% url 'PostDetail' slug=post.slug %}">Read More</a>
+            <a href="{% url 'PostDetails' slug=post.slug %}">Read More</a>
         </div>
         {% endfor %}
     </div>
