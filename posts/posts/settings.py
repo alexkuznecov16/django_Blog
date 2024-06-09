@@ -60,7 +60,7 @@ TEMPLATES = [
 ]
 
 # Изменения WSGI_APPLICATION = 'posts.wsgi.application'
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'posts.wsgi.application'
 
 
 # Database
