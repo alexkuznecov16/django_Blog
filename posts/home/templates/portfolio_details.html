@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ portfolio.title }}{% endblock %}
+
+{% block portfolio_details %}
+    {% if portfolio %}
+        <div class="portfolio-details-item">
+            <div class="card">
+                <h2 class="card-title">{{ portfolio.title }}</h2>
+                <img class="banner" src="{{ portfolio.banner.url }}" alt="{{ portfolio.title }}">
+                <p class="card-text">{{ portfolio.description }}</p>
+                <p class="card-date">{{ portfolio.date }}</p>
+                <a target="_blank" href="{{ portfolio.github }}">Github code</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

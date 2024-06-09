@@ -9,3 +9,7 @@ db.sqlite3
 
 # venv
 venv/
+
+.env
+
+/migrations

@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 
 from pathlib import Path
 
@@ -15,7 +16,7 @@ SECRET_KEY = 'django-insecure-fe1(q-qqu7ia2^@984vrjd2ni5nvw46m5i7v*gy5t+_qfrf#^@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '13.51.198.202']
+ALLOWED_HOSTS = ['.vercel.app', '13.51.198.202', '127.0.0.1']
 
 
 # Application definition
@@ -58,7 +59,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'posts.wsgi.application'
+# Изменения WSGI_APPLICATION = 'posts.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -118,6 +120,15 @@ STATICFILES_DIR = [BASE_DIR / "static"]
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+load_dotenv()
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
 # For static file reload

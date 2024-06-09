@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block description %} Welcome to my personal website! Here you'll find my latest blog posts, a portfolio of my work, and ways to get in touch. Explore my projects, read about my experiences, and feel free to connect with me. Enjoy your visit! {% endblock %}
+{% block keywords %}
+home, personal website, portfolio, projects, blog, contact, about me, work, experiences, showcase, skills, achievements, career, professional, creative, design, development, photography, art, writing, connect, networking, online presence
+{% endblock %}
+{% block latestPosts %}
+    <h2>Latest posts</h2>
+    <div class="card__inner">
+        {% for post in latest_posts %}
+        <a href="{% url 'PostDetails' slug=post.slug %}">
+            <div class="card">
+                <img class="banner" src="{{ post.banner.url }}" alt="{{ post.title }}">
+                <div class="card__info">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-subtitle">{{ post.subtitle|truncatechars:40 }}</p>
+                    <p class="card-date">{{ post.date }}</p>
+                </div>
+            </div>   
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}

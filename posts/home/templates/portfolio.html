@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} Portfolio {% endblock %}
+{% block description %} Welcome to my portfolio! Here you'll find a showcase of our latest projects and works. From web design and development to graphic design and creative endeavors, explore our diverse range of creations. We hope you find inspiration and enjoyment in our portfolio. {% endblock %}
+{% block keywords %}
+portfolio, projects, works, showcase, creations, designs, web design, development, graphic design, creative, art, digital art, websites, applications, UI/UX, branding, logos, illustrations, photography, videography, animations, multimedia
+{% endblock %}
+{% block portfolio %}
+<section data-aos="fade-up" class="portfolio">
+  <h2>Portfolio</h2>
+  <div class="card__inner">
+      {% for portfolio in portfolio %}
+      <a href="{% url 'PortfolioDetails' slug=portfolio.slug %}">
+          <div class="card">
+              <img class="banner" src="{{ portfolio.banner.url }}" alt="{{ portfolio.title }}">
+              <div class="card__info">
+                  <h3 class="card-title">{{ portfolio.title }}</h3>
+                  <p class="card-subtitle">{{ portfolio.description|truncatechars:60 }}</p>
+                  <p class="card-date">{{ portfolio.date }}</p>
+              </div>
+          </div>   
+      </a>
+      {% endfor %}
+  </div>
+</section>
+{% endblock %}

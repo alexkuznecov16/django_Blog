@@ -5,37 +5,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %} description {% endblock %}">
+    <meta name="keywords" content="{% block keywords %} keyword {% endblock %}">
     <title>{% block title %}Django app{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}?v={{ timestamp }}"></link>
+    <script defer src={% static 'js/activeLink.js' %}></script>
+    <script defer src={% static 'js/response.js' %}></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"  href="{% static 'css/main.css' %}?v={{ timestamp }}">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Django Site</h1>
-    </header>
-    <nav>
-        <a href="/">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
-    <main class="container">
-        {% if request.path == "/" %}
-            {% block home %}
-            <!-- Home page content goes here -->
-            {% endblock %}
-        {% elif request.path == "/posts/" %}
-            {% block posts %}
-            <!-- Posts content goes here -->
-            {% endblock %}
-        {% elif "/posts/" in request.path %}
-            {% block post_details %}
-                <!-- Posts content goes here -->
-            {% endblock %}
-        {% else %}
-            <!-- Default content goes here -->
-        {% endif %}
-    </main>
+    <div class="header">
+        <header class="absolute">
+            <div class="container">
+                <div class="header__inner">
+                    <h1 class="header-title">Kuznecov</h1>
+                    <nav class="header__nav">
+                        <a href="/">Home</a>
+                        <a href="/blog/">Blog</a>
+                        <a href="/portfolio/">Portfolio</a>
+                        <a href="/contact/">Contact</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    {% if request.path == '/' %}
+        <section class="Intro">
+            <div class="container">
+                <div data-aos="fade-up" class="Intro__inner">
+                    <h2 class="Intro-title">Alexander Kuznecov</h2>
+                    <p class="Intro-text">Welcome to my personal website! Here you'll find my blog, a portfolio, and ways to get in touch. Explore my projects, read about my experiences, and feel free to connect with me. Enjoy your visit!</p>
+                    <a href="/portfolio/">My Portfolio</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if request.path == '/portfolio/' %}
+        {% block portfolio %}
+        {% endblock %}
+    {% elif "/portfolio/" in request.path %}
+        {% block portfolio_details %}
+        {% endblock %}
+    {% endif %}
+    {% if request.path == '/' or request.path == '/blog' or "/blog/" in request.path %}
+        <main data-aos="fade-up" class="Posts">
+            <div class="container">
+                {% if request.path == "/" %}
+                <h2>Latest posts</h2>
+                <div class="card__inner">
+                    {% for post in latest_posts %}
+                    <a href="{% url 'PostDetails' slug=post.slug %}">
+                        <div class="card">
+                            <img class="banner" src="{{ post.banner.url }}" alt="{{ post.title }}">
+                            <div class="card__info">
+                                <h2 class="card-title">{{ post.title }}</h2>
+                                <p class="card-subtitle">{{ post.subtitle|truncatechars:40 }}</p>
+                                <p class="card-date">{{ post.date }}</p>
+                            </div>
+                        </div>   
+                    </a>
+                    {% endfor %}
+                </div>
+                {% elif request.path == "/blog/" %}
+                    {% block posts %}
+                    <!-- Posts content goes here -->
+                    {% endblock %}
+                {% elif "/blog/" in request.path %}
+                    {% block post_details %}
+                        <!-- Posts content goes here -->
+                    {% endblock %}
+                {% endif %}
+            </div>
+        </main>
+    {% endif %}
+
+    {% if request.path == '/' %}
+        <section data-aos="fade-up" class="portfolio">
+            <h2>Portfolio</h2>
+            <div class="card__inner">
+                {% for portfolio in portfolio %}
+                <a href="{% url 'PortfolioDetails' slug=portfolio.slug %}">
+                    <div class="card">
+                        <img class="banner" src="{{ portfolio.banner.url }}" alt="{{ portfolio.title }}">
+                        <div class="card__info">
+                            <h3 class="card-title">{{ portfolio.title }}</h3>
+                            <p class="card-subtitle">{{ portfolio.description|truncatechars:60 }}</p>
+                            <p class="card-date">{{ portfolio.date }}</p>
+                        </div>
+                    </div>   
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    {% if request.path == '/contact/' or request.path == '/' %}
+        <section class="Contact">
+            <div data-aos="fade-up" class="container">
+                <h2>Contact Me</h2>
+                <p>If you have any questions or comments, feel free to reach out using the form below.</p>
+                <form action="{% url 'send_message' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    {% endif %}
     <footer>
-        <p>&copy; 2024 My Django Site. All rights reserved.</p>
+        <p>&copy; 2024 Alexander Kuznecov blog. All rights reserved.</p>
     </footer>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>

@@ -1,38 +1,20 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    color: #000;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 1em 0;
-    text-align: center;
-}
-
-nav {
-    margin: 0;
-    padding: 1em;
-    background-color: #444;
-    color: #fff;
-    text-align: center;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1em;
-}
-
-main {
-    padding: 2em 0;
-    background-color: #fff;
-    flex: 1;
+* {
+    box-sizing: border-box;
 }
 
 footer {
@@ -42,67 +24,415 @@ footer {
     padding: 1em 0;
 }
 
+a {
+    color: #000;
+    text-decoration: none;
+}
+
 .container {
-    width: 95%;
+    max-width: 1170px;
     margin: 0 auto;
     padding: 2em 0;
 }
 
-.card-container {
+
+/*! Block header ====================================================*/
+.header .container {
+    padding: 0 1em;
+}
+
+.header {
+    position: relative;
+    height: 100px;
+}
+
+.absolute {
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.8);
+    z-index: 100;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
 }
 
-.card {
-    max-width: 300px;
-    border: 1px solid #ddd;
+.header__inner {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    gap: 30px;
+}
+
+.header-title {
+    font-size: clamp(13px, 4vw, 26px);
+}
+
+.header__nav {
+    display: flex;
+    gap: 10px;
+}
+
+.header__nav a {
+    color: #000;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -ms-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    font-size: clamp(8px, 4vw, 18px);
+    padding: 10px 15px;
+    background: #fff;
+}
+
+.header__nav a:is(:link, :active, :visited).active {
+    background: blueviolet;
+    color: #fff;
+}
+
+.header__nav a:hover {
+    background: blueviolet;
+    color: #fff;
+}
+
+
+/*! Block intro ====================================================*/
+.Intro {
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    color: #fff;
+}
+
+.Intro__inner {
+    max-width: 800px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.Intro-title {
+    font-size: 3em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.Intro-text {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.Intro a {
+    display: inline-block;
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
     border-radius: 5px;
-    padding: 1em;
-    margin: 1em;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.2s;
-    flex: 1 1 calc(33.333% - 2em);
+    margin: 0 10px;
+    -webkit-transition: background-color 0.3s, transform 0.3s;
+    -moz-transition: background-color 0.3s, transform 0.3s;
+    -ms-transition: background-color 0.3s, transform 0.3s;
+    -o-transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.banner {
+.Intro a:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+
+
+/*! Block blog ====================================================*/
+.Posts {
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+}
+.card__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card-text {
+    white-space: pre-line;
+}
+
+.card-title {
+    font-weight: 400;
+}
+
+.card-subtitle {
+    font-weight: bold;
+    color: #444;
+}
+
+.card__inner .card {
+    max-width: 400px;
+    width: 100%;
+    cursor: pointer;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 2px gray;
+    -webkit-transition: .2s ease-out;
+    -moz-transition: .2s ease-out;
+    -ms-transition: .2s ease-out;
+    -o-transition: .2s ease-out;
+    transition: .2s ease-out;
+}
+
+.card__inner .card:hover {
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    transform: scale(1.02);
+}
+
+.card__inner .card img {
+    max-width: 400px;
+    height: auto;
+}
+
+.card__info {
+    padding: 5px;
+}
+
+.post-details-item .card {
+    max-width: 1000px;
+    width: 90%;
+    cursor: default;
+    margin: 0 auto;
+}
+
+.post-details-item .card img {
+    max-width: 1170px;
+    width: 100%;
+}
+
+
+/*! Block contact ====================================================*/
+.Contact {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.Contact .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.Contact h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+}
+
+.Contact p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.Contact form {
+    max-width: 500px;
+    width: 100%;
+}
+
+.Contact .form-group {
+    margin-bottom: 20px;
+}
+
+.Contact label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #333;
+    text-align: left;
+}
+
+.Contact input[type="text"],
+.Contact input[type="email"],
+.Contact input[type="subject"],
+.Contact textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.Contact input[type="text"]:focus,
+.Contact input[type="email"]:focus,
+.Contact input[type="subject"]:focus,
+.Contact textarea:focus {
+    border-color: #007bff;
+}
+
+.Contact button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.Contact button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+/*! Block portfolio ====================================================*/
+
+.portfolio {
+    width: 100%;
+    padding: 40px 0;
+}
+
+.portfolio .card__inner {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.portfolio .card {
+    max-width: 400px;
+    width: 100%;
+    cursor: pointer;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 2px gray;
+    transition: transform 0.2s ease-out;
+}
+
+.portfolio .card:hover {
+    transform: scale(1.05);
+}
+
+.portfolio .card img {
+    max-width: 400px;
+    width: 100%;
+    max-height: 254px;
+}
+
+.portfolio.card__info {
+    padding: 20px;
+}
+
+.portfolio .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.portfolio .card-subtitle {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+
+.portfolio-details-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.portfolio-details-item .card {
+    max-width: 600px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.portfolio-details-item .card-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.portfolio-details-item .banner {
     max-width: 100%;
     height: auto;
 }
 
-.card:hover {
-    opacity: .7;
+.portfolio-details-item .card-text {
+    padding: 20px;
+    font-size: 1.1rem;
+    text-align: left;
 }
 
-.card-title {
-    font-size: 1.5em;
-    margin: 0.5em 0;
+.portfolio-details-item .card-date {
+    margin-top: 20px;
+    font-style: italic;
 }
 
-.card-text {
-    font-size: 1em;
-    color: #666;
-    margin: 0.5em 0;
-}
-
-.card-date {
-    font-size: 0.9em;
-    color: #999;
-    margin: 0.5em 0;
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.5em 1em;
-    color: #fff;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 5px;
+.portfolio-details-item .card a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1rem;
     text-decoration: none;
-    font-size: 1em;
+    color: #007bff;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+.portfolio-details-item .card a:hover {
+    text-decoration: underline;
+}
+
+
+/*! Block media screen ====================================================*/
+@media screen and (max-width: 500px) {
+    * {
+        -webkit-transform: none !important;
+        -moz-transform: none !important;
+        -ms-transform: none !important;
+        -o-transform: none !important;
+        transform: none !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Contact h2 {
+        font-size: 1.5rem;
+    }
+    
+    .Contact p {
+        font-size: 1rem;
+    }
+    
+    .Contact form {
+        max-width: 90%;
+    }
 }

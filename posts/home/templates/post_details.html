@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Post Detail{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block post_details %}
     {% if post %}
-        <div class="post-detail">
+        <div class="post-details-item">
             <div class="card">
-                <img class="banner" src="{{ post.banner.url }}" alt="{{ post.title }}">
                 <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-subtitle">{{ post.subtitle }}</p>
+                <img class="banner" src="{{ post.banner.url }}" alt="{{ post.title }}">
                 <p class="card-text">{{ post.text }}</p>
                 <p class="card-date">{{ post.date }}</p>
             </div>

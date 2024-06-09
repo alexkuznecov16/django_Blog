@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Blog {% endblock %}
+{% block description %} Hey there! Welcome to our blog where we share exciting stories and insightful articles on a variety of topics. From tech trends and scientific discoveries to cultural insights and travel adventures, we've got something for everyone. Stay tuned and happy reading! {% endblock %}
+{% block keywords %}
+blog, articles, posts, tech, technology, science, culture, travel, adventures, insights, stories, updates, trends, discoveries, personal experiences, tutorials, guides, reviews, opinions, news, education, knowledge, learning, entertainment
+{% endblock %}
+{% block posts %}
+    <h2>Blog</h2>
+    <div class="card__inner">
+        {% for post in posts %}
+        <a href="{% url 'PostDetails' slug=post.slug %}">
+            <div class="card">
+                <img class="banner" src="{{ post.banner.url }}" alt="{{ post.title }}">
+                <div class="card__info">
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <p class="card-subtitle">{{ post.subtitle|truncatechars:40 }}</p>
+                    <p class="card-date">{{ post.date }}</p>
+                </div>
+            </div>   
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}
