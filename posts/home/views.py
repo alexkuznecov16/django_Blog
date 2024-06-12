@@ -46,16 +46,23 @@ def send_message(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        
+
+        print(f"Name: {name}, Email: {email}, Subject: {subject}, Message: {message}")
+
         full_message = f"Name: {name}\nEmail: {email}\n\n{message}"
-        
-        send_mail(
-            subject,
-            full_message,
-            'your_email@gmail.com',  # Ваш адрес Gmail
-            ['your_email@gmail.com'],  # Адрес, на который будет отправлено письмо
-            fail_silently=False,
-        )
+
+        try:
+            send_mail(
+                subject,
+                full_message,
+                'your_email@gmail.com',  # Ваш адрес Gmail
+                ['your_email@gmail.com'],  # Адрес, на который будет отправлено письмо
+                fail_silently=False,
+            )
+        except Exception as e:
+            print(f"Error sending email: {e}")
+            return HttpResponse('Error sending email.')
+
         html_response = """
         <!DOCTYPE html>
         <html>
