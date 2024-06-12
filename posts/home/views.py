@@ -61,8 +61,8 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                email_host_user,  # Адрес отправителя
-                [email_host_user],  # Адрес получателя
+                'alexander.kuznecov16@gmail.com',  # Адрес отправителя
+                ['alexander.kuznecov16@gmail.com'],  # Адрес получателя
                 fail_silently=False,
             )
         except Exception as e:
