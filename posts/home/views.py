@@ -62,7 +62,6 @@ def send_message(request):
                 subject,
                 full_message,
                 email_host_user,
-                [email_host_user],
                 fail_silently=False,
             )
         except Exception as e:
