@@ -3,6 +3,8 @@ from .models import PostItem, PortfolioItem
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+import os
+from dotenv import load_dotenv
 
 # Create your views here.
 def home(request):
@@ -46,6 +48,8 @@ def send_message(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
+        EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+        EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
         print(f"Name: {name}, Email: {email}, Subject: {subject}, Message: {message}")
 
@@ -56,12 +60,12 @@ def send_message(request):
                 subject,
                 full_message,
                 email,
-                ['alexander.kuznecov16@gmail.com'],
+                [EMAIL_HOST_USER],
                 fail_silently=False,
             )
         except Exception as e:
             print(f"Error sending email: {e}")
-            return HttpResponse(f'Error sending email. {e}')
+            return HttpResponse(f'Error sending email. {e}, {EMAIL_HOST_USER}, {EMAIL_HOST_PASSWORD}')
 
         html_response = """
         <!DOCTYPE html>
