@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import PostItem, PortfolioItem
-# from django.core.mail import send_mail
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -39,25 +39,49 @@ def contact(request):
   return render(request, 'contact.html')
 
 
-import yagmail
-from django.http import HttpResponse
-from django.shortcuts import render
-
-def contact(request):
-    if request.method == 'POST':
+@csrf_exempt
+def send_message(request):
+    if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        try:
-            yag = yagmail.SMTP('alexander.kuznecov16@gmail.com', 'flwv gccy igmn qhgt')
-            yag.send(to='alexander.kuznecov16@gmail.com', subject=subject, contents=f'From: {name}\nEmail: {email}\n\n{message}')
-            return HttpResponse('Message sent successfully.')
-        except Exception as e:
-            return HttpResponse(f'Error sending message: {e}')
+        print(f"Name: {name}, Email: {email}, Subject: {subject}, Message: {message}")
 
-    return render(request, 'contact.html')
+        full_message = f"Name: {name}\nEmail: {email}\n\n{message}"
+
+        try:
+            send_mail(
+                subject,
+                full_message,
+                email,
+                ['alexander.kuznecov16@gmail.com'],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print(f"Error sending email: {e}")
+            return HttpResponse('Error sending email.')
+
+        html_response = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Message Sent</title>
+            <script>
+                setTimeout(function() {
+                    window.location.href = "/";
+                }, 3000);
+            </script>
+        </head>
+        <body>
+            <p>Message sent successfully. Redirecting...</p>
+        </body>
+        </html>
+        """
+        return HttpResponse(html_response)
+    else:
+        return HttpResponse('Invalid request.')
     
     
 def custom_404_view(request, exception):
