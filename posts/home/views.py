@@ -61,13 +61,13 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                'alexander.kuznecov16@gmail.com',  # Адрес отправителя
-                ['alexander.kuznecov16@gmail.com'],  # Адрес получателя
+                'dfg',  # Адрес отправителя
+                [email_host_user],  # Адрес получателя
                 fail_silently=False,
             )
         except Exception as e:
             print(f"Error sending email: {e}")
-            return HttpResponse(f'Error sending email. {e}')
+            return HttpResponse(f'Error sending email. {email_host_user}')
 
         html_response = """
         <!DOCTYPE html>
