@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import handler404
 from . import views
 
 urlpatterns = [
@@ -10,3 +11,5 @@ urlpatterns = [
     path('contact/', views.contact, name='Contact'),
     path('contact/send_message/', views.send_message, name='send_message')
 ]
+
+handler404 = views.custom_404_view

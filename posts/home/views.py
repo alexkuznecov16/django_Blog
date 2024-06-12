@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-
 def home(request):
   latest_portfolio = PortfolioItem.objects.order_by('-date')[:3]
   latest_posts = PostItem.objects.order_by('-date')[:4]
@@ -20,20 +19,25 @@ def blog(request):
   items = PostItem.objects.all()
   return render(request, 'blog.html', {"posts": items})
 
+
 def portfolio(request):
   items = PortfolioItem.objects.all().order_by('-date')
   return render(request, 'portfolio.html', {"portfolio": items})
+
 
 def portfolio_details(request, slug):
     item = PortfolioItem.objects.get(slug=slug)
     return render(request, 'portfolio_details.html', {'portfolio': item})
 
+
 def post_details(request, slug):
     post = PostItem.objects.get(slug=slug)
     return render(request, 'post_details.html', {'post': post})
   
+  
 def contact(request):
   return render(request, 'contact.html')
+
 
 @csrf_exempt
 def send_message(request):
@@ -71,3 +75,7 @@ def send_message(request):
         return HttpResponse(html_response)
     else:
         return HttpResponse('Invalid request.')
+    
+    
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
