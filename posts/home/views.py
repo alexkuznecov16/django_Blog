@@ -61,7 +61,7 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                'dfg',  # Адрес отправителя
+                email_host_user,  # Адрес отправителя
                 [email_host_user],  # Адрес получателя
                 fail_silently=False,
             )
