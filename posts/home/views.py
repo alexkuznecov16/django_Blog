@@ -55,8 +55,8 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                'your_email@gmail.com',  # Ваш адрес Gmail
-                ['your_email@gmail.com'],  # Адрес, на который будет отправлено письмо
+                email,
+                ['alexander.kuznecov16@gmail.com'],
                 fail_silently=False,
             )
         except Exception as e:
