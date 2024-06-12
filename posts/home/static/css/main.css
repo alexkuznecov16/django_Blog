@@ -76,6 +76,71 @@ a {
     gap: 10px;
 }
 
+.menu-opener {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    left: 100%;
+    position: absolute;
+    background-color: #000;
+    color: #fff;
+    z-index: 10000;
+    gap: 20px;
+}
+
+.menu-closer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 50px;
+    color: red;
+    cursor: pointer;
+}
+
+.opened {
+    display: flex !important;
+    animation-name: to-left;
+    animation-duration: .3s;
+    animation-fill-mode: forwards;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-menu h4 {
+    font-size: 30px;
+}
+
+.mobile-menu a {
+    color: #fff;
+    padding-bottom: 3px;
+    border-bottom: 2px solid blue;
+    -webkit-transition: opacity .3s ease;
+    -moz-transition: opacity .3s ease;
+    -ms-transition: opacity .3s ease;
+    -o-transition: opacity .3s ease;
+    transition: opacity .3s ease;
+}
+
+.mobile-menu a:hover {
+    opacity: .8;
+}
+
+@keyframes to-left {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: 0;
+    }    
+}
+
 .header__nav a {
     color: #000;
     -webkit-transition: .3s ease-in-out;
@@ -122,13 +187,13 @@ a {
 }
 
 .Intro-title {
-    font-size: 3em;
+    font-size: clamp(1em, 10vw, 3em);
     color: #333;
     margin-bottom: 20px;
 }
 
 .Intro-text {
-    font-size: 1.2em;
+    font-size: clamp(0.7em, 4vw, 1.3em);
     color: #555;
     margin-bottom: 30px;
 }
@@ -139,7 +204,7 @@ a {
     color: #ffffff;
     padding: 10px 20px;
     border-radius: 5px;
-    margin: 0 10px;
+    margin: 10px;
     -webkit-transition: background-color 0.3s, transform 0.3s;
     -moz-transition: background-color 0.3s, transform 0.3s;
     -ms-transition: background-color 0.3s, transform 0.3s;
@@ -174,6 +239,7 @@ a {
 
 .card-title {
     font-weight: 400;
+    font-size: clamp(1em, 7vw, 2em);
 }
 
 .card-subtitle {
@@ -203,8 +269,13 @@ a {
     transform: scale(1.02);
 }
 
+.card__inner a {
+    width: clamp(100px, 80vw, 400px);
+}
+
 .card__inner .card img {
     max-width: 400px;
+    width: clamp(100px, 80vw, 400px);
     height: auto;
 }
 
@@ -413,15 +484,6 @@ h2 {
 
 
 /*! Block media screen ====================================================*/
-@media screen and (max-width: 500px) {
-    * {
-        -webkit-transform: none !important;
-        -moz-transform: none !important;
-        -ms-transform: none !important;
-        -o-transform: none !important;
-        transform: none !important;
-    }
-}
 
 @media screen and (max-width: 768px) {
     .Contact h2 {
@@ -434,5 +496,24 @@ h2 {
     
     .Contact form {
         max-width: 90%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .desktop {
+        display: none;
+    }
+    .menu-opener {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    * {
+        -webkit-transform: none !important;
+        -moz-transform: none !important;
+        -ms-transform: none !important;
+        -o-transform: none !important;
+        transform: none !important;
     }
 }

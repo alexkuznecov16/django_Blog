@@ -5,11 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{% block description %} description {% endblock %}">
+    <meta name="description" content="{% block description %} Welcome to my personal website! Here you'll find my blog, a portfolio, and ways to get in touch. Explore my projects, read about my experiences, and feel free to connect with me. Enjoy your visit! {% endblock %}">
     <meta name="keywords" content="{% block keywords %} keyword {% endblock %}">
-    <title>{% block title %}Django app{% endblock %}</title>
+    <title>{% block title %}Alexander Kuznecov{% endblock %}</title>
+    <script src="https://kit.fontawesome.com/39bbe9b596.js" crossorigin="anonymous"></script>
     <script defer src={% static 'js/activeLink.js' %}></script>
     <script defer src={% static 'js/response.js' %}></script>
+    <script defer src={% static 'js/mobileMenu.js' %}></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css"  href="{% static 'css/main.css' %}?v={{ timestamp }}">
@@ -20,13 +22,22 @@
             <div class="container">
                 <div class="header__inner">
                     <h1 class="header-title">Kuznecov</h1>
-                    <nav class="header__nav">
+                    <nav class="header__nav desktop">
                         <a href="/">Home</a>
                         <a href="/blog/">Blog</a>
                         <a href="/portfolio/">Portfolio</a>
                         <a href="/contact/">Contact</a>
                     </nav>
+                    <i onclick="open_mobile()" class="fa-solid fa-bars menu-opener"></i>
                 </div>
+            </div>
+            <div class="mobile-menu">
+                <i onclick="close_mobile()" class="fa-solid fa-circle-xmark menu-closer"></i>
+                <h4>Navigation</h4>
+                <a href="/">Home</a>
+                <a href="/blog/">Blog</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/contact/">Contact</a>
             </div>
         </header>
     </div>
