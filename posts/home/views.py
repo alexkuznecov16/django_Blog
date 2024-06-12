@@ -48,6 +48,7 @@ def send_message(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
+        load_dotenv()
         EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
         EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
