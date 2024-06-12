@@ -55,6 +55,7 @@ def send_message(request):
         full_message = f"Name: {name}\nEmail: {email}\n\n{message}"
         
         email_host_user = os.getenv('EMAIL_HOST_USER')
+        email_host_password = os.getenv('EMAIL_HOST_PASSWORD')
 
         try:
             send_mail(
