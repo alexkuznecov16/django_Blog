@@ -53,15 +53,13 @@ def send_message(request):
         print(f"Name: {name}, Email: {email}, Subject: {subject}, Message: {message}")
 
         full_message = f"Name: {name}\nEmail: {email}\n\n{message}"
-        
-        email_host_user = os.getenv('EMAIL_HOST_USER')
 
         try:
             send_mail(
                 subject,
                 full_message,
                 email,
-                [f'{email_host_user}'],
+                ['alexander.kuznecov16@gmail.com'],
                 fail_silently=False,
             )
         except Exception as e:
