@@ -41,9 +41,9 @@ def contact(request):
   return render(request, 'contact.html')
 
 
+load_dotenv()
 @csrf_exempt
 def send_message(request):
-    load_dotenv()
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
