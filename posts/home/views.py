@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import PostItem, PortfolioItem
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import os
 from dotenv import load_dotenv
+import yagmail
 
 # Create your views here.
 def home(request):
@@ -42,6 +43,9 @@ def contact(request):
 
 
 load_dotenv()
+email_address = os.getenv('EMAIL_HOST_USER')
+email_password = os.getenv('EMAIL_HOST_PASSWORD')
+yag = yagmail.SMTP(email_address, email_password)
 @csrf_exempt
 def send_message(request):
     if request.method == "POST":
@@ -54,20 +58,12 @@ def send_message(request):
 
         full_message = f"Name: {name}\nEmail: {email}\n\n{message}"
         
-        email_host_user = os.getenv('EMAIL_HOST_USER')
-        email_host_password = os.getenv('EMAIL_HOST_PASSWORD')
-
         try:
-            send_mail(
-                subject,
-                full_message,
-                email_host_user,  # Адрес отправителя
-                [email_host_user],  # Адрес получателя
-                fail_silently=False,
-            )
+            # Замените 'recipient@example.com' на адрес получателя
+            yag.send(to=email_host_user, subject=subject, contents=full_message)
         except Exception as e:
             print(f"Error sending email: {e}")
-            return HttpResponse(f'Error sending email. {email_host_user}')
+            return HttpResponse(f'Error sending email.')
 
         html_response = """
         <!DOCTYPE html>
@@ -77,7 +73,7 @@ def send_message(request):
             <script>
                 setTimeout(function() {
                     window.location.href = "/";
-                }, 3000);
+                }, 2000);
             </script>
         </head>
         <body>
