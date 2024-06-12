@@ -62,6 +62,7 @@ def send_message(request):
                 subject,
                 full_message,
                 email_host_user,
+                ['alexander.kuznecov16@gmail.com'],
                 fail_silently=False,
             )
         except Exception as e:
