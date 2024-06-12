@@ -65,7 +65,7 @@ def send_message(request):
             )
         except Exception as e:
             print(f"Error sending email: {e}")
-            return HttpResponse(f'Error sending email. {e}, {EMAIL_HOST_USER}, {EMAIL_HOST_PASSWORD}')
+            return HttpResponse(f'Error sending email. {e}')
 
         html_response = """
         <!DOCTYPE html>
