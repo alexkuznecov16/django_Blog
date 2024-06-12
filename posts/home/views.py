@@ -3,9 +3,6 @@ from .models import PostItem, PortfolioItem
 # from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-import os
-from dotenv import load_dotenv
-import yagmail
 
 # Create your views here.
 def home(request):
@@ -42,48 +39,25 @@ def contact(request):
   return render(request, 'contact.html')
 
 
-load_dotenv()
-email_address = os.getenv('EMAIL_HOST_USER')
-email_password = os.getenv('EMAIL_HOST_PASSWORD')
-yag = yagmail.SMTP(email_address, email_password)
-@csrf_exempt
-def send_message(request):
-    if request.method == "POST":
+import yagmail
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def contact(request):
+    if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        print(f"Name: {name}, Email: {email}, Subject: {subject}, Message: {message}")
-
-        full_message = f"Name: {name}\nEmail: {email}\n\n{message}"
-        
         try:
-            # Замените 'recipient@example.com' на адрес получателя
-            yag.send(to=email_host_user, subject=subject, contents=full_message)
+            yag = yagmail.SMTP('alexander.kuznecov16@gmail.com', 'flwv gccy igmn qhgt')
+            yag.send(to='alexander.kuznecov16@gmail.com', subject=subject, contents=f'From: {name}\nEmail: {email}\n\n{message}')
+            return HttpResponse('Message sent successfully.')
         except Exception as e:
-            print(f"Error sending email: {e}")
-            return HttpResponse(f'Error sending email.')
+            return HttpResponse(f'Error sending message: {e}')
 
-        html_response = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Message Sent</title>
-            <script>
-                setTimeout(function() {
-                    window.location.href = "/";
-                }, 2000);
-            </script>
-        </head>
-        <body>
-            <p>Message sent successfully. Redirecting...</p>
-        </body>
-        </html>
-        """
-        return HttpResponse(html_response)
-    else:
-        return HttpResponse('Invalid request.')
+    return render(request, 'contact.html')
     
     
 def custom_404_view(request, exception):
