@@ -60,7 +60,7 @@ def send_message(request):
                 subject,
                 full_message,
                 os.getenv('EMAIL_HOST_USER'),  # адрес отправителя, а не получателя
-                [os.getenv('EMAIL_HOST_USER')],  # адрес получателя
+                [os.getenv('EMAIL_HOST_USER'), 'alexdevscript@gmail.com'],  # адрес получателя
                 fail_silently=False,
             )
         except Exception as e:
