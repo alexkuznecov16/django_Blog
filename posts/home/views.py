@@ -59,7 +59,7 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                email,  # адрес отправителя, а не получателя
+                'alexander.kuznecov16@gmail.com',  # адрес отправителя, а не получателя
                 ['alexander.kuznecov16@gmail.com'],  # адрес получателя
                 fail_silently=False,
             )
