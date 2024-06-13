@@ -51,16 +51,14 @@ def send_message(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        print(f"Name: {name}, Email: {email}, Subject: {subject}, Message: {message}")
-
         full_message = f"Name: {name}\nEmail: {email}\n\n{message}"
 
         try:
             send_mail(
                 subject,
                 full_message,
-                os.getenv('EMAIL_HOST_USER'),  # адрес отправителя, а не получателя
-                [os.getenv('EMAIL_HOST_USER'), 'alexdevscript@gmail.com'],  # адрес получателя
+                os.getenv('EMAIL_HOST_USER'),  # адрес отправителя
+                [os.getenv('EMAIL_HOST_USER')],  # адрес получателя
                 fail_silently=False,
             )
         except Exception as e:
@@ -85,8 +83,7 @@ def send_message(request):
         """
         return HttpResponse(html_response)
     else:
-        return HttpResponse('Invalid request.')  
-  
+        return HttpResponse('Invalid request.')
     
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
