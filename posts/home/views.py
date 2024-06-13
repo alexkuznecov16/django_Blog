@@ -58,7 +58,7 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                os.getenv('EMAIL_HOST_USER'),  # адрес отправителя
+                'alexander.kuznecov16@gmail.com',  # адрес отправителя
                 ['alexdevscript@gmail.com'],  # адрес получателя
                 fail_silently=False,
             )
