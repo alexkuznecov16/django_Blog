@@ -44,6 +44,9 @@ def contact(request):
 
 load_dotenv()
 
+email_user = os.getenv('EMAIL_HOST_USER')
+email_address = os.getenv('EMAIL_HOST_MAIL')
+
 @csrf_exempt
 def send_message(request):
     if request.method == "POST":
@@ -58,8 +61,8 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                'alexander.kuznecov16@gmail.com',  # адрес отправителя
-                ['alexdevscript@gmail.com'],  # адрес получателя
+                email_user,  # адрес отправителя
+                [email_address],  # адрес получателя
                 fail_silently=False,
             )
         except Exception as e:
