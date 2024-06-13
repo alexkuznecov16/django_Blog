@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import os
+from django.conf import settings
 from dotenv import load_dotenv
 
 # Create your views here.
@@ -84,6 +85,17 @@ def send_message(request):
         return HttpResponse(html_response)
     else:
         return HttpResponse('Invalid request.')
+  
+def send_test_email():
+    send_mail(
+        'Test Subject',
+        'This is a test message.',
+        settings.EMAIL_HOST_USER,
+        ['alexander.kuznecov16@gmail.com'],
+        fail_silently=False,
+    )
+
+send_test_email()
     
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
