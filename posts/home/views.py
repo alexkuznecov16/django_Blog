@@ -59,7 +59,7 @@ def send_message(request):
                 subject,
                 full_message,
                 os.getenv('EMAIL_HOST_USER'),  # адрес отправителя
-                [os.getenv('EMAIL_HOST_USER')],  # адрес получателя
+                ['alexdevscript@gmail.com'],  # адрес получателя
                 fail_silently=False,
             )
         except Exception as e:
@@ -85,22 +85,7 @@ def send_message(request):
         return HttpResponse(html_response)
     else:
         return HttpResponse('Invalid request.')
-  
-def send_test_email(request):
-    if request.method == "POST":
-        send_mail(
-            'Test Subject',
-            'This is a test message.',
-            settings.EMAIL_HOST_USER,
-            ['alexander.kuznecov16@gmail.com'],
-            fail_silently=False,
-        )
-        return HttpResponse('Hello bros')
-    else:
-        return HttpResponse('Incorrect')
-        
 
-send_test_email()
     
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
