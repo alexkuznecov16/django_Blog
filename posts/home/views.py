@@ -86,14 +86,19 @@ def send_message(request):
     else:
         return HttpResponse('Invalid request.')
   
-def send_test_email():
-    send_mail(
-        'Test Subject',
-        'This is a test message.',
-        settings.EMAIL_HOST_USER,
-        ['alexander.kuznecov16@gmail.com'],
-        fail_silently=False,
-    )
+def send_test_email(request):
+    if request.method == "POST":
+        send_mail(
+            'Test Subject',
+            'This is a test message.',
+            settings.EMAIL_HOST_USER,
+            ['alexander.kuznecov16@gmail.com'],
+            fail_silently=False,
+        )
+        return HttpResponse('Hello bros')
+    else:
+        return HttpResponse('Incorrect')
+        
 
 send_test_email()
     
