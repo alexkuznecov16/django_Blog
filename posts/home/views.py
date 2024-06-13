@@ -41,6 +41,8 @@ def contact(request):
   return render(request, 'contact.html')
 
 
+load_dotenv()
+
 @csrf_exempt
 def send_message(request):
     if request.method == "POST":
@@ -48,9 +50,6 @@ def send_message(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        load_dotenv()
-        EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-        EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
         print(f"Name: {name}, Email: {email}, Subject: {subject}, Message: {message}")
 
@@ -60,8 +59,8 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                email,
-                [EMAIL_HOST_USER],
+                email,  # адрес отправителя, а не получателя
+                ['alexander.kuznecov16@gmail.com'],  # адрес получателя
                 fail_silently=False,
             )
         except Exception as e:
@@ -86,8 +85,8 @@ def send_message(request):
         """
         return HttpResponse(html_response)
     else:
-        return HttpResponse('Invalid request.')
-    
+        return HttpResponse('Invalid request.')  
+  
     
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
