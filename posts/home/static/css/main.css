@@ -35,6 +35,26 @@ a {
     padding: 2em 0;
 }
 
+.blog-go, .portfolio-go {
+    text-align: center;
+    width: min-content;
+    display: block;
+    padding: 12px 40px;
+    background: blanchedalmond;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-transition: .3s ease-out;
+    -moz-transition: .3s ease-out;
+    -ms-transition: .3s ease-out;
+    -o-transition: .3s ease-out;
+    transition: .3s ease-out;
+}
+
+.blog-go:hover, .portfolio-go:hover {
+    opacity: .7;
+}
+
 
 /*! Block header ====================================================*/
 .header .container {
