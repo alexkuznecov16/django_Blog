@@ -80,6 +80,7 @@
                         </div>   
                     </a>
                     {% endfor %}
+                    <a class="blog-go" href="/blog">Blog</a>
                 </div>
                 {% elif request.path == "/blog/" %}
                     {% block posts %}
@@ -96,22 +97,24 @@
 
     {% if request.path == '/' %}
         <section data-aos="fade-up" class="portfolio">
-            <h2>Portfolio</h2>
-            <div class="card__inner">
-                {% for portfolio in portfolio %}
-                <a href="{% url 'PortfolioDetails' slug=portfolio.slug %}">
-                    <div class="card">
-                        <img class="banner" src="{{ portfolio.banner.url }}" alt="{{ portfolio.title }}">
-                        <div class="card__info">
-                            <h3 class="card-title">{{ portfolio.title }}</h3>
-                            <p class="card-subtitle">{{ portfolio.description|truncatechars:60 }}</p>
-                            <p class="card-date">{{ portfolio.date }}</p>
-                        </div>
-                    </div>   
-                </a>
-                {% endfor %}
+            <div class="container">
+                <h2>Portfolio</h2>
+                <div class="card__inner">
+                    {% for portfolio in portfolio %}
+                    <a href="{% url 'PortfolioDetails' slug=portfolio.slug %}">
+                        <div class="card">
+                            <img class="banner" src="{{ portfolio.banner.url }}" alt="{{ portfolio.title }}">
+                            <div class="card__info">
+                                <h3 class="card-title">{{ portfolio.title }}</h3>
+                                <p class="card-subtitle">{{ portfolio.description|truncatechars:60 }}</p>
+                                <p class="card-date">{{ portfolio.date }}</p>
+                            </div>
+                        </div>   
+                    </a>
+                    {% endfor %}
+                </div>
+                <a class="portfolio-go" href="/portfolio">Blog</a>
             </div>
-            <a class="portfolio-go" href="/portfolio">Blog</a>
         </section>
     {% endif %}
 
