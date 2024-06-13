@@ -1,11 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import PostItem, PortfolioItem
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-import os
-from django.conf import settings
-from dotenv import load_dotenv
 
 # Create your views here.
 def home(request):
@@ -42,11 +39,6 @@ def contact(request):
   return render(request, 'contact.html')
 
 
-load_dotenv()
-
-email_user = os.getenv('EMAIL_HOST_USER')
-email_address = os.getenv('EMAIL_HOST_MAIL')
-
 @csrf_exempt
 def send_message(request):
     if request.method == "POST":
@@ -61,8 +53,8 @@ def send_message(request):
             send_mail(
                 subject,
                 full_message,
-                email_user,  # адрес отправителя
-                [email_address],  # адрес получателя
+                'alexander.kuznecov16@gmail.com',
+                ['alexdevscript@gmail.com'],
                 fail_silently=False,
             )
         except Exception as e:
